@@ -1,5 +1,3 @@
-import { WaitlistFormData } from '../types';
-
 interface ZohoTokenResponse {
   access_token: string;
   refresh_token?: string;
@@ -15,6 +13,12 @@ interface ZohoLeadResponse {
   }>;
 }
 
+interface WaitlistFormData {
+  email: string;
+  firmName: string;
+  firmSize: string;
+}
+
 class ZohoCRMService {
   private clientId: string;
   private clientSecret: string;
@@ -23,9 +27,9 @@ class ZohoCRMService {
   private tokenExpiry: number | null = null;
 
   constructor() {
-    this.clientId = import.meta.env.VITE_ZOHO_CLIENT_ID || '';
-    this.clientSecret = import.meta.env.VITE_ZOHO_CLIENT_SECRET || '';
-    this.refreshToken = import.meta.env.VITE_ZOHO_REFRESH_TOKEN || '';
+    this.clientId = process.env.ZOHO_CLIENT_ID || '';
+    this.clientSecret = process.env.ZOHO_CLIENT_SECRET || '';
+    this.refreshToken = process.env.ZOHO_REFRESH_TOKEN || '';
   }
 
   private async getAccessToken(): Promise<string> {
@@ -59,7 +63,7 @@ class ZohoCRMService {
 
   async createLead(formData: WaitlistFormData): Promise<void> {
     if (!this.clientId || !this.clientSecret || !this.refreshToken) {
-      throw new Error('Zoho CRM credentials not configured. Please set VITE_ZOHO_CLIENT_ID, VITE_ZOHO_CLIENT_SECRET, and VITE_ZOHO_REFRESH_TOKEN environment variables.');
+      throw new Error('Zoho CRM credentials not configured');
     }
 
     const accessToken = await this.getAccessToken();
@@ -99,4 +103,44 @@ class ZohoCRMService {
   }
 }
 
-export const zohoCRMService = new ZohoCRMService();
+const zohoCRMService = new ZohoCRMService();
+
+export default async function handler(req: any, res: any) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
+  try {
+    const { email, firmName, firmSize }: WaitlistFormData = req.body;
+
+    // Validate required fields
+    if (!email || !firmName || !firmSize) {
+      return res.status(400).json({
+        message: 'Missing required fields: email, firmName, firmSize'
+      });
+    }
+
+    // Create lead in Zoho CRM
+    await zohoCRMService.createLead({ email, firmName, firmSize });
+
+    res.status(200).json({
+      message: 'Lead created successfully in Zoho CRM'
+    });
+  } catch (error) {
+    console.error('Error creating lead:', error);
+    res.status(500).json({
+      message: 'Failed to create lead in Zoho CRM',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+}

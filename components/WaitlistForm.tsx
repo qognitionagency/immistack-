@@ -3,7 +3,6 @@ import { ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 import { Button } from './Button';
 import { Input } from './Input';
 import { WaitlistFormData, CRMStatus } from '../types';
-import { zohoCRMService } from '../services/zohoCRMService';
 
 export const WaitlistForm: React.FC = () => {
   const [formData, setFormData] = useState<WaitlistFormData>({
@@ -13,14 +12,22 @@ export const WaitlistForm: React.FC = () => {
   });
   const [status, setStatus] = useState<CRMStatus>(CRMStatus.IDLE);
 
-  const submitToZoho = async (data: WaitlistFormData) => {
-    try {
-      await zohoCRMService.createLead(data);
-      console.log('Lead successfully created in Zoho CRM');
-    } catch (error) {
-      console.error('Failed to create lead in Zoho CRM:', error);
-      throw error; // Re-throw to handle in the form
+  const submitToCRM = async (data: WaitlistFormData) => {
+    const response = await fetch('/api/create-lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to create lead');
     }
+
+    const result = await response.json();
+    console.log('Lead created successfully:', result.message);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +35,7 @@ export const WaitlistForm: React.FC = () => {
     setStatus(CRMStatus.SUBMITTING);
 
     try {
-      await submitToZoho(formData);
+      await submitToCRM(formData);
       setStatus(CRMStatus.SUCCESS);
     } catch (error) {
       console.error('Form submission failed:', error);
