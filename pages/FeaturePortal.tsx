@@ -113,7 +113,7 @@ export const FeaturePortal: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWai
                               <div className="p-1.5 bg-techBlue/10 rounded-full mt-0.5"><Briefcase className="h-4 w-4 text-techBlue" /></div>
                               <div>
                                  <strong className="block text-navy">Kanban Case Boards</strong>
-                                 <span className="text-sm text-gray-500">Drag-and-drop cases through stages (Intake -> Lodgement -> Decision).</span>
+                                 <span className="text-sm text-gray-500">Drag-and-drop cases through stages (Intake &rarr; Lodgement &rarr; Decision).</span>
                               </div>
                            </li>
                            <li className="flex items-start gap-3">

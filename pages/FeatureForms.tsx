@@ -62,7 +62,7 @@ export const FeatureForms: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWait
             <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
                <Wand2 className="h-8 w-8 text-goldDark mb-4" />
                <h3 className="font-bold text-navy text-lg mb-2">Smart Logic</h3>
-               <p className="text-gray-600 text-sm">Handles complex history gaps. If there's a gap in address history > 28 days, the system flags it before export.</p>
+               <p className="text-gray-600 text-sm">Handles complex history gaps. If there's a gap in address history &gt; 28 days, the system flags it before export.</p>
             </div>
             <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
                <UploadCloud className="h-8 w-8 text-growth mb-4" />
