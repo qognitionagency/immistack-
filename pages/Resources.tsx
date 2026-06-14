@@ -16,7 +16,7 @@ export const Resources: React.FC<{onNavigate: (page: Page) => void}> = ({onNavig
             {/* Blog Card 1 */}
             <div className="group cursor-pointer" onClick={() => onNavigate('RESOURCE_ARTICLE')}>
                <div className="overflow-hidden rounded-xl mb-4">
-                  <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Blog" className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                  <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="The future of AI in visa processing — Immistack trend report" loading="lazy" width="800" height="480" className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" />
                </div>
                <div className="text-xs font-bold text-goldDark uppercase mb-2">Trend Report</div>
                <h3 className="text-xl font-bold text-navy mb-2 group-hover:text-techBlue transition-colors">The Future of AI in Visa Processing</h3>
@@ -27,7 +27,7 @@ export const Resources: React.FC<{onNavigate: (page: Page) => void}> = ({onNavig
             {/* Blog Card 2 */}
             <div className="group cursor-pointer" onClick={() => onNavigate('RESOURCE_ARTICLE')}>
                <div className="overflow-hidden rounded-xl mb-4">
-                  <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="Blog" className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                  <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="2025 TSMIT salary threshold changes explained for immigration compliance" loading="lazy" width="800" height="480" className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" />
                </div>
                <div className="text-xs font-bold text-goldDark uppercase mb-2">Compliance</div>
                <h3 className="text-xl font-bold text-navy mb-2 group-hover:text-techBlue transition-colors">2025 TSMIT Changes Explained</h3>
@@ -38,7 +38,7 @@ export const Resources: React.FC<{onNavigate: (page: Page) => void}> = ({onNavig
             {/* Blog Card 3 */}
             <div className="group cursor-pointer" onClick={() => onNavigate('RESOURCE_ARTICLE')}>
                <div className="overflow-hidden rounded-xl mb-4">
-                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Blog" className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Case study: how Global Migrate saved 20 hours a week with workflow automation" loading="lazy" width="800" height="480" className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" />
                </div>
                <div className="text-xs font-bold text-goldDark uppercase mb-2">Case Study</div>
                <h3 className="text-xl font-bold text-navy mb-2 group-hover:text-techBlue transition-colors">How 'Global Migrate' Saved 20hrs/Week</h3>

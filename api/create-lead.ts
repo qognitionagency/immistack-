@@ -17,6 +17,12 @@ interface WaitlistFormData {
   email: string;
   firmName: string;
   firmSize: string;
+  /** "Individual" or "Professional" — day-one list segmentation. */
+  persona?: string;
+  /** Capture point, e.g. "Exit Intent Popup", "Lead Magnet". */
+  source?: string;
+  /** Inbound referral code from the waitlist referral program. */
+  referralSource?: string;
 }
 
 class ZohoCRMService {
@@ -68,12 +74,25 @@ class ZohoCRMService {
 
     const accessToken = await this.getAccessToken();
 
+    const persona = formData.persona || 'Professional';
+    const captureSource = formData.source || 'Website';
+    const descriptionParts = [
+      `Persona: ${persona}`,
+      `Firm Size: ${formData.firmSize}`,
+      `Capture Source: ${captureSource}`,
+    ];
+    if (formData.referralSource) {
+      descriptionParts.push(`Referred By: ${formData.referralSource}`);
+    }
+
     const leadData = {
       data: [{
         Company: formData.firmName,
         Last_Name: formData.firmName,
         Email: formData.email,
-        Description: `Firm Size: ${formData.firmSize} - Source: Immistack Free Trial Modal`,
+        // Industry is a standard Zoho Leads picklist field, handy for segmentation.
+        Industry: persona === 'Individual' ? 'Individual / Applicant' : 'Immigration Professional',
+        Description: descriptionParts.join(' | '),
         Lead_Source: 'Immistack Website',
         Lead_Status: 'Not Contacted'
       }]

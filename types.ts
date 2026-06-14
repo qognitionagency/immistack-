@@ -24,10 +24,18 @@ export type Page =
   | 'FEATURE_COMMISSION'
   | 'FEATURE_MULTIOFFICE';
 
+export type Persona = 'Individual' | 'Professional';
+
 export interface WaitlistFormData {
   email: string;
   firmName: string;
   firmSize: 'Solo' | 'Small (1-5)' | 'Medium (6-25)' | 'Enterprise (25+)';
+  /** Day-one list segmentation: an individual vs. a lawyer/consultant/agency. */
+  persona?: Persona;
+  /** Where the lead was captured, e.g. "Exit Intent Popup", "Lead Magnet". */
+  source?: string;
+  /** Optional referral code/source for the waitlist referral program. */
+  referralSource?: string;
 }
 
 export interface Feature {

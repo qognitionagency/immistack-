@@ -32,7 +32,7 @@ export const About: React.FC = () => {
          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative">
                <div className="absolute top-0 left-0 w-full h-full bg-gold/10 rounded-2xl transform -translate-x-4 -translate-y-4"></div>
-               <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80" alt="Team meeting" className="rounded-2xl shadow-xl relative z-10" />
+               <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80" alt="The Immistack team of migration agents and technologists collaborating" loading="lazy" width="1632" height="1088" className="rounded-2xl shadow-xl relative z-10" />
             </div>
             <div>
                <h3 className="text-3xl font-heading font-bold text-navy mb-6">Our Mission</h3>
