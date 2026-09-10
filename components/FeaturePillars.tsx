@@ -55,7 +55,7 @@ export const FeaturePillars: React.FC = () => {
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
                     <div className="mt-1 bg-techBlue/10 p-1 rounded-full"><CheckCircle2 className="h-4 w-4 text-techBlue" /></div>
-                    <span className="text-gray-600"><strong>Embed on your website:</strong> Capture leads 24/7.</span>
+                    <span className="text-gray-600"><strong>One intake form, reused:</strong> Build it once, run it with every client.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="mt-1 bg-techBlue/10 p-1 rounded-full"><CheckCircle2 className="h-4 w-4 text-techBlue" /></div>

@@ -268,7 +268,6 @@ export function allStaticPaths(): string[] {
     ...PAGES.map((p) => p.path),
     SECURITY_META.path,
     ARTICLE_META.path,
-    PRIVACY_META.path,
-    TERMS_META.path,
+    // PRIVACY_META.path / TERMS_META.path — routes unregistered, see routes.tsx
   ];
 }

@@ -6,13 +6,14 @@
   "packageManager": "pnpm@10.26.2",
   "scripts": {
     "dev": "vite",
-    "build": "npm run check:claims && npm run check:legal && vite-react-ssg build",
+    "build": "npm run check:claims && npm run check:legal && vite-react-ssg build && npm run check:sitemap",
     "build:spa": "npm run check:claims && npm run check:legal && vite build",
     "preview": "vite preview",
     "twenty:schema": "node scripts/twenty-schema.mjs",
     "check:claims": "node scripts/check-claims.mjs",
     "typecheck": "tsc --noEmit",
-    "check:legal": "node scripts/check-legal.mjs"
+    "check:legal": "node scripts/check-legal.mjs",
+    "check:sitemap": "node scripts/check-sitemap.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

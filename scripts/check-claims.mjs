@@ -91,6 +91,26 @@ const BANNED = [
   [/live[:\s-]+ai\b/i, "AI is gated on OPENAI_API_KEY — it is not live"],
   [/\bAI[- ](powered|driven)\b/i, "AI is not connected; do not claim it as a shipped capability"],
   [/SLA uptime guarantee/i, "no SLA"],
+  // Added 2026-09-10 after Ruth caught three live claims this denylist passed
+  // because none of them used a banned *word*. A keyword gate cannot see a
+  // false claim phrased in ordinary English, so these encode the three classes
+  // that actually shipped rather than trying to be exhaustive.
+  //
+  // BR-2: a registered agent may never promise or imply a visa outcome. This is
+  // a professional-code breach, not a marketing overreach. Shipped on
+  // ResourceArticle.tsx as a "Success Probability Score" roadmap promise.
+  [/(success|approval|outcome)[\s-]*(probability|likelihood|score|chance)|probability[\s-]*score/i,
+    "BR-2 — never state or imply a visa outcome, including as a roadmap promise"],
+  // No auto-charging exists: src/billing has no autoCharge/scheduled-billing
+  // code and client settlement is recorded by staff, not processed. Shipped on
+  // FeatureCRM.tsx as "System auto-charges cards on due dates."
+  [/auto[-\s]?charg\w*/i,
+    "no client-payment processor exists; charges are recorded by staff, never auto-charged"],
+  // Every route on @Controller('forms') is JWT-guarded (form.controller.ts:34)
+  // and no @Public() lead/intake/embed route exists anywhere in meru-core, so
+  // an anonymous website visitor has nothing to submit to. FR-3.3 is unbuilt.
+  [/embed\w*\b[^.]{0,40}\byour (website|site)\b|\bwebsite (form|widget|embed)\b/i,
+    "no public form-submission endpoint exists — every /forms route requires a JWT (FR-3.3 unbuilt)"],
   // The product has NO client-facing payment processor. /billing/checkout is
   // Meru billing the tenant; client settlement is out-of-band and staff record
   // it via PATCH /payments/:id/settle. This is a deliberate design, not a gap.

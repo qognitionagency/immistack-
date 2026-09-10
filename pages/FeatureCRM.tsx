@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Layout, MessageSquare, Zap, CreditCard, Landmark, DollarSign } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Layout, MessageSquare, Zap, CreditCard, Landmark } from 'lucide-react';
 import { Button } from '../components/Button';
 
 export const FeatureCRM: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWaitlist}) => {
@@ -20,7 +20,7 @@ export const FeatureCRM: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWaitli
                  Stop doing data entry.
                </h1>
                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                 Immistack captures leads from your website, WhatsApp, and email, then automatically creates client profiles. No more copying details from PDFs to spreadsheets.
+                 Build an intake form once inside Immistack. A staff member runs it with a client and it becomes a client profile — no more copying details between spreadsheets and the file.
                </p>
                <Button onClick={onOpenWaitlist} variant="secondary" className="px-8 py-4">
                   See CRM in Action
@@ -37,20 +37,6 @@ export const FeatureCRM: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWaitli
                <p className="text-lg text-gray-600 mb-6">
                   Build intake forms with conditional logic. If a client selects "Married", the form automatically asks for Spousal details. If they select "Single", it skips.
                </p>
-               <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                     <CheckCircle2 className="h-5 w-5 text-growth" />
-                     <span className="text-gray-700">Embed directly on your website</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                     <CheckCircle2 className="h-5 w-5 text-growth" />
-                     <span className="text-gray-700">Multi-language support</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                     <CheckCircle2 className="h-5 w-5 text-growth" />
-                     <span className="text-gray-700">Auto-save progress for clients</span>
-                  </li>
-               </ul>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
                {/* Mock Form */}
@@ -78,31 +64,31 @@ export const FeatureCRM: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWaitli
                <div className="space-y-4">
                   <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
                      <MessageSquare className="h-5 w-5 text-growth" />
-                     <div className="text-sm text-white">Client sends WhatsApp: "Is my visa approved?"</div>
+                     <div className="text-sm text-white">Client asks on WhatsApp: "Any update on my case?"</div>
                   </div>
                   <div className="flex justify-center">
                      <div className="h-8 w-px bg-gray-600"></div>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-techBlue/20 rounded-lg border border-techBlue/30">
                      <Zap className="h-5 w-5 text-techBlue" />
-                     <div className="text-sm text-white">AI Agent checks database status</div>
+                     <div className="text-sm text-white">Agent logs the exchange against the matter</div>
                   </div>
                   <div className="flex justify-center">
                      <div className="h-8 w-px bg-gray-600"></div>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
                      <MessageSquare className="h-5 w-5 text-growth" />
-                     <div className="text-sm text-white">Auto-Reply: "Hi John, it is currently in 'Further Assessment'."</div>
+                     <div className="text-sm text-white">Timeline shows: status "Further Assessment"</div>
                   </div>
                </div>
             </div>
             <div className="order-1 md:order-2">
-               <h3 className="text-2xl sm:text-3xl font-bold text-navy mb-4">WhatsApp & Email Sync</h3>
+               <h3 className="text-2xl sm:text-3xl font-bold text-navy mb-4">One Timeline For Every Conversation</h3>
                <p className="text-lg text-gray-600 mb-6">
-                  Stop searching through your phone for client messages. Immistack syncs WhatsApp and Email conversations directly to the client's timeline.
+                  Stop searching through your phone for client messages. Log a WhatsApp exchange or an email against the matter and it sits on the client's timeline with everything else — there's no live WhatsApp inbox sync, you record it once and the file keeps it.
                </p>
                <Button onClick={onOpenWaitlist} variant="primary">
-                  Connect Communication Channels <ArrowRight className="ml-2 h-4 w-4" />
+                  See the Client Timeline <ArrowRight className="ml-2 h-4 w-4" />
                </Button>
             </div>
          </div>
@@ -116,7 +102,7 @@ export const FeatureCRM: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWaitli
                </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
                <div className="p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
                   <div className="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-4">
                      <CreditCard className="h-6 w-6 text-indigo-600" />
@@ -143,16 +129,6 @@ export const FeatureCRM: React.FC<{onOpenWaitlist: () => void}> = ({onOpenWaitli
                      <span className="text-[10px] font-bold bg-gray-100 px-2 py-1 rounded">Stage-gated</span>
                      <span className="text-[10px] font-bold bg-gray-100 px-2 py-1 rounded">Instalments</span>
                   </div>
-               </div>
-
-               <div className="p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
-                  <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
-                     <DollarSign className="h-6 w-6 text-orange-600" />
-                  </div>
-                  <h4 className="font-bold text-navy text-lg mb-2">Automated Installments</h4>
-                  <p className="text-sm text-gray-500 mb-4">
-                     Set up "Stage Payments" (e.g., 50% on Intake, 50% on Lodgement). System auto-charges cards on due dates.
-                  </p>
                </div>
             </div>
          </div>

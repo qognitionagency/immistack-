@@ -22,6 +22,40 @@ const REQUIRED = [
   ["effectiveDate", 'ISO date these documents take effect, e.g. "2026-09-08"'],
 ];
 
+// Are the two pages actually published? This script used to tell the operator
+// to "fill them, or unregister the two routes in routes.tsx" while only ever
+// implementing the first branch — so unregistering could not satisfy it. The
+// honest options this file's own header names are "filled" or "not published",
+// and this is the second one. Comments are stripped first so a block comment
+// *about* the routes is never mistaken for a live registration.
+const ROUTES_FILE = "routes.tsx";
+let routesSrc = "";
+try {
+  routesSrc = readFileSync(ROUTES_FILE, "utf8");
+} catch {
+  console.error(`check:legal — cannot read ${ROUTES_FILE}`);
+  process.exit(1);
+}
+const routesCode = routesSrc
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .replace(/^\s*\/\/.*$/gm, "");
+const published = ["PRIVACY_META", "TERMS_META"].filter((m) =>
+  new RegExp(`path:\\s*${m}\\.path`).test(routesCode),
+);
+
+if (published.length === 0) {
+  console.log(
+    "check:legal — /privacy and /terms are UNREGISTERED, so no policy can ship " +
+      "naming a blank entity. Passing.",
+  );
+  console.log(
+    "  Open gap: this site posts lead PII to a CRM via /api/create-lead, and an " +
+      "APP entity needs an accessible privacy policy. Fill legal/entity.ts and " +
+      "re-register both routes to close it.",
+  );
+  process.exit(0);
+}
+
 let src;
 try {
   src = readFileSync(ENTITY_FILE, "utf8");

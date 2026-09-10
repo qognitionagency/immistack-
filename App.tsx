@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { WaitlistProvider } from './context/WaitlistContext';
+import { BookingProvider } from './context/BookingContext';
 import { OrganizationSchema } from './components/Schema';
 import { Shield, MapPin, Mail } from 'lucide-react';
 import { Page } from './types';
@@ -28,6 +29,7 @@ const App: React.FC = () => {
 
   return (
     <WaitlistProvider>
+      <BookingProvider>
       <div className="min-h-screen flex flex-col font-sans text-navy overflow-x-hidden bg-slate selection:bg-gold/30">
         {/* Site-wide structured data */}
         <OrganizationSchema />
@@ -124,8 +126,10 @@ const App: React.FC = () => {
                 <Link to="/security" className="text-gray-400 hover:text-navy">Security</Link>
                 {/* These were dead `<span>`s — footer text styled like links
                     that went nowhere, on a site collecting lead PII. */}
-                <Link to="/privacy" className="text-gray-400 hover:text-navy">Privacy Policy</Link>
-                <Link to="/terms" className="text-gray-400 hover:text-navy">Terms of Service</Link>
+                {/* Privacy Policy / Terms links removed with their routes
+                    (2026-09-10) — a footer link to an unregistered route is a
+                    404 on a page that collects lead PII, which is worse than
+                    either alternative. Restore both with the routes. */}
                 <a href="/sitemap.xml" className="text-gray-400 hover:text-navy">Sitemap</a>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -139,6 +143,7 @@ const App: React.FC = () => {
 
         {/* Exit-intent + weekly countdown promo */}
       </div>
+      </BookingProvider>
     </WaitlistProvider>
   );
 };

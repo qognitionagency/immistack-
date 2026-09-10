@@ -11,8 +11,6 @@ import { PAGES, PageMeta, ARTICLE_META, SECURITY_META, NOT_FOUND_META, PRIVACY_M
 
 // Pages
 import { Home } from './pages/Home';
-import { Privacy } from './pages/Privacy';
-import { Terms } from './pages/Terms';
 import { Features } from './pages/Features';
 import { FeatureCRM } from './pages/FeatureCRM';
 import { FeatureCompliance } from './pages/FeatureCompliance';
@@ -191,21 +189,11 @@ const SecurityRoute: React.FC = () => {
  * build while the entity behind them is unfilled, so these routes cannot ship
  * naming a blank company.
  */
-const PrivacyRoute: React.FC = () => (
-  <>
-    <Seo title={PRIVACY_META.title} description={PRIVACY_META.description} path={PRIVACY_META.path} />
-    <BreadcrumbSchema trail={[{ name: 'Privacy', path: PRIVACY_META.path }]} />
-    <Privacy />
-  </>
-);
-
-const TermsRoute: React.FC = () => (
-  <>
-    <Seo title={TERMS_META.title} description={TERMS_META.description} path={TERMS_META.path} />
-    <BreadcrumbSchema trail={[{ name: 'Terms', path: TERMS_META.path }]} />
-    <Terms />
-  </>
-);
+// PrivacyRoute / TermsRoute were removed with their registrations (2026-09-10).
+// To restore: re-add both components here, re-add the two `{ path: X_META.path }`
+// children below, the two footer links in App.tsx, and the two paths in
+// seo/site.ts allStaticPaths(). `pages/Privacy.tsx`, `pages/Terms.tsx`,
+// `legal/entity.ts` and both _META entries are all still present and untouched.
 
 const NotFoundRoute: React.FC = () => (
   <>
@@ -236,8 +224,15 @@ export const routes: RouteRecord[] = [
       ...pageChildren,
       { path: SECURITY_META.path.replace(/^\//, ''), element: <SecurityRoute /> },
       { path: ARTICLE_META.path.replace(/^\//, ''), element: <ArticleRoute /> },
-      { path: PRIVACY_META.path.replace(/^\//, ''), element: <PrivacyRoute /> },
-      { path: TERMS_META.path.replace(/^\//, ''), element: <TermsRoute /> },
+      // `/privacy` and `/terms` are UNREGISTERED (operator decision, 2026-09-10).
+      // `scripts/check-legal.mjs` blocks the build while `legal/entity.ts` has
+      // null fields, and those five facts (ASIC name, ABN, registered address,
+      // privacy contact, effective date) are held only by the operator. The
+      // components, their meta and `legal/entity.ts` are all left in place, so
+      // restoring these two lines is the whole revert once the entity is filled.
+      // NOTE: this site collects lead PII into a CRM via /api/create-lead, and
+      // under the Privacy Act an APP entity needs an accessible privacy policy.
+      // This is a known open gap, not an oversight.
       // Param fallback so any /blog/<slug> resolves client-side.
       { path: 'blog/:slug', element: <ArticleRoute /> },
       // Concrete path so vite-react-ssg prerenders dist/404.html for hosting.

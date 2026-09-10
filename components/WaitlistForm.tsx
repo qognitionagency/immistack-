@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle, Loader2, User, Building2, Copy, Check, Gift } 
 import { Button } from './Button';
 import { Input } from './Input';
 import { WaitlistFormData, CRMStatus, Persona } from '../types';
+import { useBooking } from '../context/BookingContext';
 
 interface WaitlistFormProps {
   /** Lead source passed through to Zoho (set by whatever opened the form). */
@@ -30,6 +31,7 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({ source = 'Website', 
   const [status, setStatus] = useState<CRMStatus>(CRMStatus.IDLE);
   const [referralSource, setReferralSource] = useState<string | undefined>(undefined);
   const [copied, setCopied] = useState(false);
+  const { openBooking } = useBooking();
   const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
@@ -191,6 +193,31 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({ source = 'Website', 
           <br />
           Founding members get <span className="font-semibold text-navy">50% off</span> at launch.
         </p>
+      </div>
+
+      {/* Booking sits above the form, not beside it: a 30-minute call is the
+          conversion this business actually wants (qualified demo → provisioned
+          trial), and the waitlist is the fallback for someone not ready to
+          talk. Placing it here reaches all 21 existing CTAs — every one of
+          them opens this dialog — without editing a single page. */}
+      <div className="mb-6 rounded-xl border border-gray-200 bg-slate/60 p-4 text-center">
+        <p className="text-sm text-navy font-semibold">Would you rather just talk to us?</p>
+        <p className="mt-1 text-xs text-gray-500">
+          Book a 30-minute call and we will walk you through it.
+        </p>
+        <button
+          type="button"
+          onClick={openBooking}
+          className="mt-3 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border border-navy/15 bg-white px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
+        >
+          Book a 30-minute demo
+        </button>
+      </div>
+
+      <div className="mb-5 flex items-center gap-3">
+        <span className="h-px flex-1 bg-gray-200" />
+        <span className="text-[11px] uppercase tracking-wider text-gray-400">or join the waitlist</span>
+        <span className="h-px flex-1 bg-gray-200" />
       </div>
 
       {/* Persona segmentation */}
